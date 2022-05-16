@@ -1,2 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tinkoffdb
+    username: postgres
+    password: ld2erw71904
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+    
 api:
   isSandBoxMode: true
+  
