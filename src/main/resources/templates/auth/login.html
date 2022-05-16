@@ -11,12 +11,64 @@
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class = "container-fluid">
-	    		<a class="navbar-brand" th:href="@{/}">TINKOFF API</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			    	<span class="navbar-toggler-icon"></span>
-			  	</button>
+				<div class = "d-flex align-items-center">
+					<img th:src="@{/images/tinkoff.jpg}" width="40" height="40" class="mx-2 my-2 rounded" alt="Cinque Terre"/>
+				    <a class="navbar-brand mx-2" th:href="@{/}">
+				    	<span class = "display-6">TINKOFF API</span>
+				    </a>
+				</div>
 			</div>			
 		</nav>		
 		<br>
+		<div class = "container-fluid">
+			<div class = "row justify-content-center">
+				<div class = "col-md-4 col-md-offset-3">
+					<h1>Вход</h1>
+					<form th:method = "POST" th:action = "@{/login}"> <!-- Создавать контроллер для перехвата POST запроса по адресу login не нужно. 
+																	   Spring Security сам его обработает. -->
+						<div th:if = "${param.error}">
+							<div class = "alert alert-danger py-1">
+								Неправильное имя пользователя или пароль.
+							</div>
+						</div>
+					
+						<div th:if = ${param.logout}>
+							<div class = "alert alert-info py-0">
+								Вы успешно вышли из аккаунта.
+							</div>
+						</div>
+						
+						
+						<!-- В POST запросе Spring Security будет искать элементы с именами "username" и "password". Из них он получит имя и пароль соответственно. -->
+						<div class = "form-group mb-2">
+							<label class = "control-label mb-1" for = "username">Электронная почта: </label>
+							<input class = "form-control" type = "text" id = "username" name = "username" autofocus required/>
+						</div>
+						
+						<div class = "form-group mb-2">
+							<label class = "control-label mb-1" for = "username">Пароль: </label>
+							<input class = "form-control" type = "password" id = "password" name = "password" required/>
+						</div>
+						
+
+						
+						<div class = "form-group mb-2">
+							<div class = "d-flex justify-content-between align-items-center">
+								<button class = "btn btn-primary" type = "submit">
+									Войти
+								</button>
+								<div>
+									<span>Нет аккаунта? </span>
+									<a class = "my-2" th:href="@{/registration}">
+											Зарегистрироваться
+									</a>
+								</div>
+							</div>
+						</div>	
+					</form>
+
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

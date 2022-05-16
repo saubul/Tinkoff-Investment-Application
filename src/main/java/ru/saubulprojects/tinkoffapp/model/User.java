@@ -49,4 +49,8 @@ public class User {
 		this.password = password;
 		this.roles = roles;
 	}
+	
+	@Transient
+	@NotBlank(message = "Необходимо повторить пароль.")
+	private String matchingPassword;
 }

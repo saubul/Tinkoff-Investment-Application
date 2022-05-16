@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Role {
 	
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -24,4 +26,8 @@ public class Role {
 	
 	@ManyToMany(mappedBy = "roles")
 	private Collection<User> users;
+	
+	public Role(RoleType name) {
+		this.name = name;
+	}
 }
