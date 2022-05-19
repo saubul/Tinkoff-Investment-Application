@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import ru.saubulprojects.tinkoffapp.model.User;
+import ru.saubulprojects.tinkoffapp.entity.User;
 import ru.saubulprojects.tinkoffapp.service.UserService;
 
 @Controller

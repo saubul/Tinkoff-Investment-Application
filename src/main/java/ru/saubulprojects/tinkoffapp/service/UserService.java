@@ -2,7 +2,7 @@ package ru.saubulprojects.tinkoffapp.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import ru.saubulprojects.tinkoffapp.model.User;
+import ru.saubulprojects.tinkoffapp.entity.User;
 
 public interface UserService extends UserDetailsService{
 

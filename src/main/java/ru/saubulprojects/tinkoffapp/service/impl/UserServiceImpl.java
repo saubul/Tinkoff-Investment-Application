@@ -11,9 +11,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import ru.saubulprojects.tinkoffapp.model.Role;
-import ru.saubulprojects.tinkoffapp.model.RoleType;
-import ru.saubulprojects.tinkoffapp.model.User;
+import ru.saubulprojects.tinkoffapp.entity.Role;
+import ru.saubulprojects.tinkoffapp.entity.RoleType;
+import ru.saubulprojects.tinkoffapp.entity.User;
+import ru.saubulprojects.tinkoffapp.model.TinkoffUserDetails;
 import ru.saubulprojects.tinkoffapp.repository.RoleRepository;
 import ru.saubulprojects.tinkoffapp.repository.UserRepository;
 import ru.saubulprojects.tinkoffapp.service.UserService;
@@ -40,8 +41,7 @@ public class UserServiceImpl implements UserService{
 		if(user == null) {
 			throw new UsernameNotFoundException("Пользователь не найден.");
 		}
-		
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+		return new TinkoffUserDetails(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles()), user.getSsotoken());
 	}
 	
 	public Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {

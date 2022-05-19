@@ -1,4 +1,4 @@
-package ru.saubulprojects.tinkoffapp.model;
+package ru.saubulprojects.tinkoffapp.entity;
 
 import java.util.Collection;
 

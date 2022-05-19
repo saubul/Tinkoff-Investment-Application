@@ -4,25 +4,41 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
-		<link rel="shortcut icon" th:href="@{/images/tinkoff.ico}"/>
+		<link rel="shortcut icon" th:href="@{/images/Icon.ico}"/>
 	</head>
 	<body>
 		<div id="nav-menu">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class = "container-fluid">
 					<div class = "d-flex align-items-center">
-						<img th:src="@{/images/tinkoff.jpg}" width="40" height="40" class="mx-2 my-2 rounded" alt="Cinque Terre"/>
-				    	<a class="navbar-brand mx-2" th:href="@{/}">
-				    		<span class = "display-6">TINKOFF API</span>
+						<img th:src="@{/images/Бар кукол.jpg}" width="40" height="40" class="mx-2 my-2 rounded"/>
+				    	<a class="navbar-brand mx-2" th:href="@{/search}">
+				    		<span class = "display-6">SAUSEARCH</span>
 				    	</a>
-				    	<form th:method="GET" th:action="@{/}" class="d-flex mx-3">
-							<input class="form-control me-2" type="search" placeholder="Поиск" th:name="ticker" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Поиск</button>
-						</form>
+
 			    	</div>
 		    		<div sec:authorize="isAnonymous()" class = "d-flex">
 						<a class="nav-link active h6 my-0" th:href="@{/login}">Войти</a>
 						<a class="nav-link active h6 my-0" th:href="@{/registration}">Зарегистрироваться</a>
+					</div>
+					<div sec:authorize="isAuthenticated()" class = "d-flex">
+						<a class="nav-link active h6 my-0" th:href="@{/profile}">Личный кабинет</a>
+					</div>
+				</div>			
+			</nav>
+		</div>
+		
+		<div id="nav-profile-menu">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class = "container-fluid">
+					<div class = "d-flex align-items-center">
+						<img th:src="@{/images/Бар кукол.jpg}" width="40" height="40" class="mx-2 my-2 rounded"/>
+				    	<a class="navbar-brand mx-2" th:href="@{/search}">
+				    		<span class = "display-6">SAUSEARCH</span>
+				    	</a>
+			    	</div>
+		    		<div class = "d-flex">
+						<a class="nav-link active h6 my-0" th:href="@{/logout}">Выйти</a>
 					</div>
 				</div>			
 			</nav>

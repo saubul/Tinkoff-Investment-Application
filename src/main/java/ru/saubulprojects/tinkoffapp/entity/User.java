@@ -1,4 +1,4 @@
-package ru.saubulprojects.tinkoffapp.model;
+package ru.saubulprojects.tinkoffapp.entity;
 
 import java.util.Collection;
 
@@ -36,7 +36,10 @@ public class User {
 	@NotBlank(message = "Необходимо ввести пароль.")
 	private String password;
 	
-	@ManyToMany
+	@NotBlank(message = "Необходимо ввести токен.")
+	private String ssotoken;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "users_roles",
 			   joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="user_id_fk"))},
 			   inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "role_id_fk"))})
@@ -53,4 +56,6 @@ public class User {
 	@Transient
 	@NotBlank(message = "Необходимо повторить пароль.")
 	private String matchingPassword;
+	
+	
 }

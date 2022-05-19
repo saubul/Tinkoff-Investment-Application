@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import ru.saubulprojects.tinkoffapp.handler.SuccessLoginHandler;
 import ru.saubulprojects.tinkoffapp.service.UserService;
 
 @EnableWebSecurity
@@ -16,11 +17,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 	private final PasswordEncoder passwordEncoder;
 	private final UserService userService;
+	private final SuccessLoginHandler successLoginHandler;
 	
 	public SecurityConfiguration(PasswordEncoder passwordEncoder,
-								 UserService userService) {
+								 UserService userService,
+								 SuccessLoginHandler successLoginHandler) {
 		this.passwordEncoder = passwordEncoder;
 		this.userService = userService;
+		this.successLoginHandler = successLoginHandler;
 	}
 	
 	@Bean
@@ -38,16 +42,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception{
+		String[] staticResources = {
+				"/images/**"
+		};
+		
 		http
 			.authorizeRequests()
-				.antMatchers("/profile/**").hasRole("USER")
-				.anyRequest()
-				.permitAll()
+				.antMatchers(staticResources).permitAll()
+				.antMatchers("/registration").permitAll()
+				.anyRequest().authenticated()
 				.and()
 			.formLogin()
 				.loginPage("/login")
-				.defaultSuccessUrl("/")
+				.defaultSuccessUrl("/search")
 				.permitAll()
+				.successHandler(successLoginHandler)
 				.and()
 			.logout()
 				.invalidateHttpSession(true)
@@ -58,4 +67,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				.permitAll();
 			
 	}
+	
 }
